@@ -61,13 +61,7 @@
       window.proto.init(window.protoSettings);
     };
     document.head.appendChild(prs);
-
-    // Button click handler
-    document.getElementById('destroyBtn').addEventListener('click', function () {
-      if (window.proto && typeof window.proto.destroy === 'function') {
-        window.proto.destroy();
-      }
-    });
   </script>
 </body>
 </html>
+
