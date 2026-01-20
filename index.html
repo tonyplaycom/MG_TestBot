@@ -28,32 +28,46 @@
       color: #333;
       text-align: center;
     }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <img src="https://v3.yola.ai/playcom-watermark.svg" alt="Playcom Watermark" />
   <h1>MG Test - AI Agent</h1>
-<script type="text/javascript">
-  window.protoSettings = {
-    id: '01KDD177DHPQX77F41XYGQV28N',
-    onInit: function () {
-      window.proto.open();
-      window.proto.startchat();
-    },
-  };
 
-  var prs = document.createElement('script');
-  prs.src = 'https://embed.yola.ai/index.umd.js';
-  prs.type = 'text/javascript';
-  prs.async = true;
-  prs.onload = function () {
-    window.proto.init(window.protoSettings);
-  };
-  document.head.appendChild(prs);
-</script>
+  <!-- New Button -->
+  <button id="destroyBtn">Close AI Agent</button>
+
+  <script type="text/javascript">
+    window.protoSettings = {
+      id: '01KDD177DHPQX77F41XYGQV28N',
+      onInit: function () {
+        window.proto.open();
+        window.proto.startchat();
+      },
+    };
+
+    var prs = document.createElement('script');
+    prs.src = 'https://embed.yola.ai/index.umd.js';
+    prs.type = 'text/javascript';
+    prs.async = true;
+    prs.onload = function () {
+      window.proto.init(window.protoSettings);
+    };
+    document.head.appendChild(prs);
+
+    // Button click handler
+    document.getElementById('destroyBtn').addEventListener('click', function () {
+      if (window.proto && typeof window.proto.destroy === 'function') {
+        window.proto.destroy();
+      }
+    });
+  </script>
 </body>
 </html>
-
-
-
-
