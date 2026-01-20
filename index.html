@@ -41,27 +41,48 @@
   <img src="https://v3.yola.ai/playcom-watermark.svg" alt="Playcom Watermark" />
   <h1>MG Test - AI Agent</h1>
 
-  <!-- New Button -->
-  <button id="destroyBtn">Close AI Agent</button>
+  <button id="switchAgentBtn">Switch AI Agent</button>
 
   <script type="text/javascript">
+    // ---------- INITIAL AGENT ----------
     window.protoSettings = {
       id: '01KDD177DHPQX77F41XYGQV28N',
-      onInit: function () {
-        window.proto.open();
-        window.proto.startchat();
-      },
     };
 
-    var prs = document.createElement('script');
-    prs.src = 'https://embed.yola.ai/index.umd.js';
-    prs.type = 'text/javascript';
-    prs.async = true;
-    prs.onload = function () {
-      window.proto.init(window.protoSettings);
-    };
-    document.head.appendChild(prs);
+    function loadProto(settings) {
+      // Remove existing embed script if any
+      const existingScript = document.getElementById('proto-embed');
+      if (existingScript) {
+        existingScript.remove();
+      }
+
+      const prs = document.createElement('script');
+      prs.id = 'proto-embed';
+      prs.src = 'https://embed.yola.ai/index.umd.js';
+      prs.type = 'text/javascript';
+      prs.async = true;
+      prs.onload = function () {
+        window.proto.init(settings);
+      };
+      document.head.appendChild(prs);
+    }
+
+    loadProto(window.protoSettings);
+
+    // ---------- BUTTON ACTION ----------
+    document.getElementById('switchAgentBtn').addEventListener('click', function () {
+      // 1. Destroy current agent
+      if (window.proto && typeof window.proto.destroy === 'function') {
+        window.proto.destroy();
+      }
+
+      // 2. Load new agent
+      window.protoSettings = {
+        id: '01K7GN5PTM2Y56VZDS0NFJ7F8Z'
+      };
+
+      loadProto(window.protoSettings);
+    });
   </script>
 </body>
 </html>
-
